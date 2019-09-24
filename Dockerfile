@@ -85,6 +85,12 @@ RUN if command pip >/dev/null 2>&1; then \
   fi
 RUN pip install pipenv
 
+### add script and data
+RUN mkdir /home/worker
+ADD src /home/worker/src
+ADD data /home/worker/data
+
+# Launch
 USER root
 WORKDIR $SPARK_HOME
 CMD ["su", "-c", "bin/spark-class org.apache.spark.deploy.master.Master", "spark"]
