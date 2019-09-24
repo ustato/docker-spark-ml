@@ -7,6 +7,21 @@ RUN apt-get -y update \
  && apt-get -y upgrade \
  && apt-get install -y --no-install-recommends apt-utils \
  && apt-get install -y locales \
+  build-essential \
+  curl \
+  git \
+  libbz2-dev \
+  libncurses5-dev \
+  libncursesw5-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  llvm \
+  make \
+  tk-dev \
+  wget \
+  xz-utils \
+  zlib1g-dev \
  && dpkg-reconfigure -f noninteractive locales \
  && locale-gen C.UTF-8 \
  && /usr/sbin/update-locale LANG=C.UTF-8 \
@@ -44,7 +59,31 @@ ENV PATH $PATH:${SPARK_HOME}/bin
 RUN wget -q -O- --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 \
   "http://mirrors.advancedhosters.com/apache/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz" \
   | tar xz --strip 1 -C $SPARK_HOME/ \
- && chown -R spark:spark $SPARK_HOME
+  && chown -R spark:spark $SPARK_HOME
+
+# Python
+### pyenv install
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/bin:$PATH
+ARG PYTHON_VERSION=anaconda3-5.3.1
+RUN curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer \
+  | bash
+ENV PATH=$HOME/.pyenv/bin:$PATH
+RUN git clone https://github.com/pyenv/pyenv.git /tmp/pyenv && \
+  cd /tmp/pyenv/plugins/python-build && \
+  ./install.sh && \
+  rm -rf /tmp/pyenv
+RUN python-build $PYTHON_VERSION /usr/local/
+RUN if command pip >/dev/null 2>&1; then \
+  echo "pip already installed. Skipping manual installation."; \
+  else \
+  echo "Installing pip manually"; \
+  curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
+  chmod 755 /tmp/get-pip.py && \
+  /tmp/get-pip.py && \
+  rm /tmp/get-pip.py; \
+  fi
+RUN pip install pipenv
 
 USER root
 WORKDIR $SPARK_HOME
