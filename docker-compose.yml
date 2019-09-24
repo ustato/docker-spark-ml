@@ -1,5 +1,5 @@
 master:
-  image: semantive/spark
+  build: .
   command: bin/spark-class org.apache.spark.deploy.master.Master -h master
   hostname: master
   environment:
@@ -15,7 +15,7 @@ master:
     - ./data:/tmp/data
 
 worker1:
-  image: semantive/spark
+  build: .
   command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
   hostname: worker1
   environment:
@@ -33,7 +33,7 @@ worker1:
     - ./data:/tmp/data
 
 worker2:
-  image: semantive/spark
+  build: .
   command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
   hostname: worker2
   environment:
