@@ -28,7 +28,7 @@ print("==== 標準化されたデータ ====")
 std_feature_vectors.select("標準化変量").show(truncate=False)
 
 # build PCA model
-pca = PCA(k=3, inputCol="標準化変量", outputCol="主成分得点")
+pca = PCA(k=2, inputCol="標準化変量", outputCol="主成分得点")
 pcaModel = pca.fit(std_feature_vectors)
 
 print("==== 固有ベクトル ====")

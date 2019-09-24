@@ -21,3 +21,24 @@ The SparkUI will be running at `http://${YOUR_DOCKER_HOST}:8080` with one worker
 ## License
 
 Apache Licence
+
+
+# additional
+
+先人の知恵を借りて，Dockerで手軽にSpark，PySparkを利用できるように改良した．
+
+## Usage
+
+### Build
+
+まずはdocker-composeでビルドとコンテナを立ち上げる．
+
+``` shell
+docker-compose up --build
+```
+
+### PCA on PySpark
+
+``` shell
+docker exec -it docker-spark-ml_master_1 spark-submit /home/worker/src/pyspark_pca.py
+```
