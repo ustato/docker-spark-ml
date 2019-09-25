@@ -95,7 +95,7 @@ RUN pip install pipenv
 # Microsoft Machine Learning for Apache Spark
 RUN spark-shell --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1
 RUN pyspark --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1
-RUN spark-submit --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 MyApp.jar
+# RUN spark-submit --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 MyApp.jar
 
 # add script and data
 RUN mkdir /home/worker
