@@ -1,3 +1,6 @@
+Pkg.add("DataFrames")
+Pkg.add("CSV")
+
 using DataFrames
 using CSV
 
