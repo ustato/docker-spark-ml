@@ -36,9 +36,9 @@ Apache Licence
 ``` shell
 docker-compose up --build
 ```
-### datasets
+<!-- ### datasets -->
 
-今回は[SUSHI Preference Data Sets](http://www.kamishima.net/sushi)を利用してみる．
+<!-- 今回は[SUSHI Preference Data Sets](http://www.kamishima.net/sushi)を利用してみる． -->
 
 ### PCA on PySpark
 

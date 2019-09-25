@@ -85,21 +85,22 @@ RUN if command pip >/dev/null 2>&1; then \
   fi
 RUN pip install pipenv
 
-# Julia
-RUN cd /tmp && \
-  wget https://julialangnightlies-s3.julialang.org/bin/linux/x64/julia-latest-linux64.tar.gz && \
-  tar zxvf julia-latest-linux64.tar.gz && \
-  mv julia-*/ /opt/julia && \
-  ln -s /opt/julia/bin/julia /usr/local/bin/julia
+# # Julia
+# RUN cd /tmp && \
+#   wget https://julialangnightlies-s3.julialang.org/bin/linux/x64/julia-latest-linux64.tar.gz && \
+#   tar zxvf julia-latest-linux64.tar.gz && \
+#   mv julia-*/ /opt/julia && \
+#   ln -s /opt/julia/bin/julia /usr/local/bin/julia
 
 ### add script and data
 RUN mkdir /home/worker
 ADD src /home/worker/src
 ADD data /home/worker/data
 
-### get dataset
-RUN wget http://www.kamishima.net/asset/sushi3-2016.zip -P /home/worker/data
-RUN cd /home/worker/src && julia make_sushi3-2016_traincsv.jl
+# ### get dataset
+# RUN wget http://www.kamishima.net/asset/sushi3-2016.zip -P /home/worker/data
+# RUN cd /home/worker/data && unzip sushi3-2016.zip
+# RUN cd /home/worker/src && julia make_sushi3-2016_traincsv.jl
 
 # Launch
 USER root
