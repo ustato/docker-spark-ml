@@ -22,7 +22,7 @@ feature_vectors.show()
 
 
 print("==== LightGBMの学習 ====")
-model = LightGBMRegressor(application='quantile',
+model = LightGBMRegressor(application='root_mean_squared_error',
                           alpha=0.3,
                           learningRate=0.3,
                           numIterations=100,
