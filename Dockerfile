@@ -112,6 +112,7 @@ RUN cd /home/worker/data && unzip geographic-units-by-industry-and-statistical-a
 
 
 # Launch
+RUN pip install --upgrade pip
 RUN pip install -r /home/worker/requirements.txt
 USER root
 WORKDIR $SPARK_HOME

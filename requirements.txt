@@ -1,2 +1,4 @@
+PyHamcrest
+twisted
 pyspark
 https://mmlspark.azureedge.net/pip/mmlspark-0.15.dev2+1.g11ad24d-py2.py3-none-any.whl
