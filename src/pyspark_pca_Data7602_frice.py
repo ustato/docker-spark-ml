@@ -13,6 +13,7 @@ spark = (SparkSession
 df = spark.read.csv('/home/worker/data/Data7602.csv', header=True, inferSchema=True, mode="DROPMALFORMED", encoding='UTF-8').drop("Area")
 df = df.union(df)
 df = df.union(df)
+df = df.union(df)
 
 print("==== 生データ ====")
 df.show(truncate=False)

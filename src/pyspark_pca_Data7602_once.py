@@ -11,7 +11,6 @@ spark = (SparkSession
 
 # Read raw data
 df = spark.read.csv('/home/worker/data/Data7602.csv', header=True, inferSchema=True, mode="DROPMALFORMED", encoding='UTF-8').drop("Area")
-print((df.count(), len(df.columns)))
 
 print("==== 生データ ====")
 df.show(truncate=False)
@@ -42,3 +41,6 @@ pca_score = pcaModel.transform(std_feature_vectors).select("主成分得点")
 print("==== 主成分得点 ====")
 
 pca_score.show(truncate=False)
+
+print("==== 元のデータフレーム行数 ====")
+print((df.count(), len(df.columns)))
