@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 from pyspark.sql import SparkSession
 from pyspark.ml.feature import PCA, VectorAssembler, StandardScaler
-
-import pyspark
-spark = pyspark.sql.SparkSession.builder.appName("MyApp") \
-            .config("spark.jars.packages", "com.microsoft.ml.spark:mmlspark_2.11:0.18.1") \
-            .getOrCreate()
-from mmlspark.lightgbm import LightGBMRegressor
+from mmlspark import LightGBMRegressor
 
 # Initialize SparkSession
 spark = (SparkSession
