@@ -92,7 +92,12 @@ RUN pip install pipenv
 #   mv julia-*/ /opt/julia && \
 #   ln -s /opt/julia/bin/julia /usr/local/bin/julia
 
-### add script and data
+# Microsoft Machine Learning for Apache Spark
+RUN spark-shell --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 && \
+  pyspark --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 && \
+  spark-submit --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 MyApp.jar
+
+# add script and data
 RUN mkdir /home/worker
 ADD src /home/worker/src
 ADD data /home/worker/data
