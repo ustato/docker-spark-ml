@@ -16,7 +16,7 @@ services:
       - 8080:8080
     volumes:
       - ./data:/tmp/data
-    mem_limit: 500m
+    mem_limit: 150m
 
   worker1:
     build: .

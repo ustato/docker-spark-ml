@@ -97,7 +97,9 @@ RUN mkdir /home/worker
 ADD src /home/worker/src
 ADD data /home/worker/data
 
-# ### get dataset
+### get dataset
+RUN wget https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2018/Download-data/geographic-units-by-industry-and-statistical-area-2000-18.zip -P /home/worker/data
+RUN cd /home/worker/data && unzip geographic-units-by-industry-and-statistical-area-2000-18.zip
 # RUN wget http://www.kamishima.net/asset/sushi3-2016.zip -P /home/worker/data
 # RUN cd /home/worker/data && unzip sushi3-2016.zip
 # RUN cd /home/worker/src && julia make_sushi3-2016_traincsv.jl
