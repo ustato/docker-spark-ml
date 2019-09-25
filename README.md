@@ -36,12 +36,21 @@ Apache Licence
 ``` shell
 docker-compose up --build
 ```
-<!-- ### datasets -->
 
-<!-- 今回は[SUSHI Preference Data Sets](http://www.kamishima.net/sushi)を利用してみる． -->
+### Ignore INFO
+
+``` shell
+docker exec -it docker-spark-ml_master_1 spark-submit --conf spark.driver.extraJavaOptions='-Dlog4j.configuration=file:/home/spark/conf/log4j.properties' src.py
+```
 
 ### PCA on PySpark
 
 ``` shell
 docker exec -it docker-spark-ml_master_1 spark-submit /home/worker/src/pyspark_pca.py
+```
+
+### LightGBM on PySpark
+
+``` shell
+docker exec -it docker-spark-ml_master_1 spark-submit --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 /home/worker/src/pyspark_LightGBM_news.py
 ```
