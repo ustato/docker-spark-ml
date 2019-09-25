@@ -101,6 +101,7 @@ RUN pyspark --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1
 RUN mkdir /home/worker
 ADD src /home/worker/src
 ADD data /home/worker/data
+ADD requirements.txt /home/worker
 
 ### get dataset
 RUN wget https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2018/Download-data/geographic-units-by-industry-and-statistical-area-2000-18.zip -P /home/worker/data
@@ -109,7 +110,9 @@ RUN cd /home/worker/data && unzip geographic-units-by-industry-and-statistical-a
 # RUN cd /home/worker/data && unzip sushi3-2016.zip
 # RUN cd /home/worker/src && julia make_sushi3-2016_traincsv.jl
 
+
 # Launch
+RUN pip install -r /home/worker/requirements.txt
 USER root
 WORKDIR $SPARK_HOME
 CMD ["su", "-c", "bin/spark-class org.apache.spark.deploy.master.Master", "spark"]
