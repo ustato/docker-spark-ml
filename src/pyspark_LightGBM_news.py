@@ -11,7 +11,7 @@ spark = (SparkSession
          .getOrCreate())
 
 # Read raw data
-df = spark.read.csv('/home/worker/data/Data7602.csv', header=True, inferSchema=True, mode="DROPMALFORMED", encoding='UTF-8').drop("Area")
+df = spark.read.csv('/home/worker/data/news.csv', header=True, inferSchema=True, mode="DROPMALFORMED", encoding='UTF-8')
 
 print("==== 生データ ====")
 df.show(truncate=False)
@@ -27,7 +27,7 @@ model = LightGBMRegressor(alpha=0.3,
                           numIterations=100,
                           numLeaves=31,
                           featuresCol='変量',
-                          labelCol='geo_count').fit(feature_vectors)
+                          labelCol='スポーツ').fit(feature_vectors)
 
 
 print("==== 元のデータフレーム行数 ====")

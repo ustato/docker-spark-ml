@@ -106,18 +106,16 @@ ADD requirements.txt /home/worker
 ### get dataset
 RUN wget https://www.stats.govt.nz/assets/Uploads/New-Zealand-business-demography-statistics/New-Zealand-business-demography-statistics-At-February-2018/Download-data/geographic-units-by-industry-and-statistical-area-2000-18.zip -P /home/worker/data
 RUN cd /home/worker/data && unzip geographic-units-by-industry-and-statistical-area-2000-18.zip
-# RUN wget http://www.kamishima.net/asset/sushi3-2016.zip -P /home/worker/data
-# RUN cd /home/worker/data && unzip sushi3-2016.zip
-# RUN cd /home/worker/src && julia make_sushi3-2016_traincsv.jl
 
 # pip install libs
 RUN pip install --upgrade pip
 RUN pip install -r /home/worker/requirements.txt
 
-# Run sample
-RUN spark-submit --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 /home/worker/src/pyspark_LightGBM_Data7602.py
-
 # Launch
 USER root
 WORKDIR $SPARK_HOME
+### Ignore INFO
+RUN cp conf/log4j.properties.template conf/log4j.properties
+RUN sed -i -e "s/log4j.rootCategory=INFO/log4j.rootCategory=ERROR/g" conf/log4j.properties
+RUN /bin/bash
 CMD ["su", "-c", "bin/spark-class org.apache.spark.deploy.master.Master", "spark"]
