@@ -92,10 +92,10 @@ RUN pip install pipenv
 #   mv julia-*/ /opt/julia && \
 #   ln -s /opt/julia/bin/julia /usr/local/bin/julia
 
+
 # Microsoft Machine Learning for Apache Spark
 RUN spark-shell --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1
 RUN pyspark --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1
-# RUN spark-submit --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 MyApp.jar
 
 # add script and data
 RUN mkdir /home/worker
@@ -110,10 +110,14 @@ RUN cd /home/worker/data && unzip geographic-units-by-industry-and-statistical-a
 # RUN cd /home/worker/data && unzip sushi3-2016.zip
 # RUN cd /home/worker/src && julia make_sushi3-2016_traincsv.jl
 
-
-# Launch
+# pip install libs
 RUN pip install --upgrade pip
 RUN pip install -r /home/worker/requirements.txt
+
+# Run sample
+RUN spark-submit --packages com.microsoft.ml.spark:mmlspark_2.11:0.18.1 /home/worker/src/pyspark_LightGBM_Data7602.py
+
+# Launch
 USER root
 WORKDIR $SPARK_HOME
 CMD ["su", "-c", "bin/spark-class org.apache.spark.deploy.master.Master", "spark"]

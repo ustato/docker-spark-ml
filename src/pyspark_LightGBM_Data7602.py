@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from pyspark.sql import SparkSession
 from pyspark.ml.feature import PCA, VectorAssembler, StandardScaler
-from mmlspark import LightGBMRegressor
+# from mmlspark import LightGBMRegressor
+from mmlspark.lightgbm import LightGBMClassifier
 
 # Initialize SparkSession
 spark = (SparkSession
