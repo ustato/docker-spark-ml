@@ -27,8 +27,8 @@ model = LightGBMRegressor(application='quantile',
                           learningRate=0.3,
                           numIterations=100,
                           numLeaves=31,
-                          featuresCol = '変量',
-                          labelCol = 'geo_count').fit(feature_vectors)
+                          featuresCol='変量',
+                          labelCol='geo_count').fit(feature_vectors)
 
 
 print("==== 元のデータフレーム行数 ====")
