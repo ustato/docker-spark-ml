@@ -12,7 +12,7 @@ spark = (SparkSession
 # Read raw data
 df = spark.read.csv('/home/worker/data/Data7602.csv', header=True, inferSchema=True, mode="DROPMALFORMED", encoding='UTF-8').drop("Area")
 df = df.union(df)
-pdf = df.union(df)
+df = df.union(df)
 print((df.count(), len(df.columns)))
 
 print("==== 生データ ====")
