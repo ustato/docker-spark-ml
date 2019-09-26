@@ -16,7 +16,8 @@ services:
       - 8080:8080
     volumes:
       - ./data:/tmp/data
-    mem_limit: 400m
+    mem_limit: 250m
+    memswap_limit: 1m
 
   worker1:
     build: .
@@ -35,7 +36,8 @@ services:
       - 8081:8081
     volumes:
       - ./data:/tmp/data
-    mem_limit: 5g
+    mem_limit: 4g
+    memswap_limit: 1m
 
   worker2:
     build: .
@@ -54,4 +56,5 @@ services:
       - 8082:8082
     volumes:
       - ./data:/tmp/data
-    mem_limit: 5g
+    mem_limit: 4g
+    memswap_limit: 1m
